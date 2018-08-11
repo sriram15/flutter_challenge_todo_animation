@@ -1,3 +1,4 @@
+import 'package:anim_challenge_todo/add_todo.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(new MyApp());
@@ -11,7 +12,11 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new TodoAppHome(title: 'Flutter UI Challenge'),
+      initialRoute: '/',
+      routes: {
+        '/' : (context) => TodoAppHome(title: 'Flutter UI Challenge'),
+        '/addTodo' : (context) => AddTodoScreen()
+      },
     );
   }
 }
@@ -39,8 +44,9 @@ class _TodoAppHomeState extends State<TodoAppHome> {
       backgroundColor: Colors.grey[200],
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
+        heroTag: 'add_task',
         onPressed: () {
-          //TODO: Move to next page
+          Navigator.pushNamed(context, '/addTodo');
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
