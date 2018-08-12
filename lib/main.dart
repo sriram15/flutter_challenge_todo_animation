@@ -1,4 +1,5 @@
 import 'package:anim_challenge_todo/add_todo.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(new MyApp());
@@ -14,8 +15,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/' : (context) => TodoAppHome(title: 'Flutter UI Challenge'),
-        '/addTodo' : (context) => AddTodoScreen()
+        '/': (context) => TodoAppHome(title: 'Flutter UI Challenge'),
+        '/addTodo': (context) => AddTodoScreen()
       },
     );
   }
@@ -46,7 +47,10 @@ class _TodoAppHomeState extends State<TodoAppHome> {
         child: Icon(Icons.add),
         heroTag: 'add_task',
         onPressed: () {
-          Navigator.pushNamed(context, '/addTodo');
+          Navigator.push(
+            context,
+            new MyCustomRoute(builder: (context) => new AddTodoScreen()),
+          );
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -158,4 +162,15 @@ class TodoItemCard extends StatelessWidget {
       ),
     );
   }
+}
+
+class MyCustomRoute<T> extends CupertinoPageRoute<T> {
+  MyCustomRoute({WidgetBuilder builder, RouteSettings settings})
+      : super(builder: builder, settings: settings);
+
+  @override
+  bool get fullscreenDialog => true;
+  
+  @override
+  Duration get transitionDuration => const Duration(milliseconds: 300);
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart' show timeDilation;
 
 class AddTodoScreen extends StatefulWidget {
   @override
@@ -8,13 +9,30 @@ class AddTodoScreen extends StatefulWidget {
 }
 
 class _AddTodoScreenState extends State<AddTodoScreen> {
+  final FocusNode textFieldFocusNode = FocusNode();
+
   Future<bool> _onWillPop() {
     FocusScope.of(context).requestFocus(new FocusNode());
     return Future.value(true);
   }
 
   @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    _focusOnTextField();
+  }
+
+  @override
+  void dispose() {
+    textFieldFocusNode.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    // timeDilation = 10.0;
     TextStyle buttonTextStyle = Theme.of(context).textTheme.title.copyWith(
         fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white);
     TextStyle hintTextStyle = Theme
@@ -41,7 +59,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 children: <Widget>[
                   TextField(
-                    autofocus: true,
+                    focusNode: textFieldFocusNode,
                     maxLines: 5,
                     decoration: InputDecoration.collapsed(
                         hintStyle: hintTextStyle,
@@ -74,5 +92,10 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             ],
           )),
     );
+  }
+
+  void _focusOnTextField() async{
+    await Future.delayed(Duration(milliseconds: 300));
+    FocusScope.of(context).requestFocus(textFieldFocusNode);
   }
 }
