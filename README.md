@@ -1,8 +1,14 @@
-# anim_challenge_todo
+# Todo Animation - Flutter Challenge
 
-A new Flutter project.
+This implementation is based on dribbble shot by Gis1on. Thanks to Gis1on for the awesome design.
 
-## Getting Started
+https://dribbble.com/shots/4925856-To-do-animation
 
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+## Final Result
+
+<img src="screenshots/final_gif.gif" width="200"/>
+
+You can read more about how I go to this stage by reading my blog
+
+https://medium.com/@sriramthiagarajan94/flutter-todo-animation-development-journey-4da80e18ec5e
+
